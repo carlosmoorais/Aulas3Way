@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="bootstrap.css" type="text/css" rel="stylesheet">
+	<title>TESTE BOOTSTRAP</title>
+
+	<script type="text/javascript">
+		function buscar(titulo) {
+			alert("O valor recebido por parametro foi: "+titulo.value);
+
+			var livros = ["LIVRO 1", "LIVRO2", "LIVRO3", "LIVRO4"];
+			var filmes = ["FILME 1", "FILME2", "FILME3", "FILME4"];
+
+			if(titulo.value == "livros"){
+				alert(livros);
+			}else if(titulo.value == "filmes"){
+				alert(filmes);
+			}else{
+				alert("Entrada inválida!");
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="col-sm-6">
+	<div class="panel-primary">
+	<div class="panel-heading">Livros ou Filmes</div>
+	<div class="panel-body">
+		<form name="myForm" onsubmit="buscar(opcao)">
+		<div class="row">
+			<fieldset>
+				<div class="form-group">
+					<label for="Opcao">Opcao</label>
+					<input type="text" class="form-control" id="opcao" name="opcao" autofocus required>
+				</div>
+
+				
+			</fieldset>
+		</div>
+		<input type="submit" class="btn btn-primary" value="Confirmar">
+	</form>
+</div>
+</div>
+</body>
+</html>

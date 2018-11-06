@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function checarIdade() {
+			var idade = prompt("Digite sua idade: ");
+			if(idade < 12){
+				alert("Criança!");
+			}else if(idade < 14){
+				alert("Pré-adolescente!");
+			}else if(idade < 18){
+				alert("Adolescente!");
+			}else if(idade < 60){
+				alert("Adulto!");
+			}else{
+				alert("Idoso!");
+			}
+			document.write("Fim da execução da função!");
+		}
+	</script>
+</head>
+<body>
+    <button type="button" onclick="checarIdade()">Checar idade</button>
+ 
+</body>
+</html>
