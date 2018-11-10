@@ -4,4 +4,11 @@
   <welcome-file-list>
     <welcome-file>exercicio1-servlet.jsp</welcome-file>
   </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+  <error-page>
+    <location>/erroGeral.jsp</location>
+  </error-page>
 </web-app>
