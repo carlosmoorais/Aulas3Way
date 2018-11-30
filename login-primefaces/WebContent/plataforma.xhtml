@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Livros</title>
+</h:head>
+<div align="center">
+	<h:body>
+		<h:form>
+			<p:growl id="growl" showDetail="true" life="2000" />
+			<p:messages id="messages" autoUpdate="true" />
+
+			<h:panelGrid>
+				<p:selectOneButton value="#{imagesView.option}">
+					<f:selectItem itemLabel="Harry Potter" itemValue="Harry Potter" />
+					<f:selectItem itemLabel="Senhor dos Aneis" itemValue="Senhor dos Aneis" />
+					<p:ajax update="@form"/>
+				</p:selectOneButton>
+			</h:panelGrid>
+
+			<p:commandButton value="Selecionar" update="imagens, growl"	icon="ui-icon-check" />
+			<p:spacer />
+
+			<p:galleria id="imagens" value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+				<p:graphicImage name="/imagens/#{image}" width="200" alt="Capa do #{image}" title="#{image}" />
+			</p:galleria>
+		</h:form>
+	</h:body>
+</div>
+</html>

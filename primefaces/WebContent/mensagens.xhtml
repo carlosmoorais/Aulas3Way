@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hello PrimeFaces!</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		<p:commandButton value="Mensagem Informativa" actionListener="#{mensagens.info}"></p:commandButton>
+		<p:commandButton value="Mensagem de Erro" actionListener="#{mensagens.erro}"></p:commandButton>
+		<p:commandButton value="Mensagem de Aviso" actionListener="#{mensagens.aviso}"></p:commandButton>
+		<p:commandButton value="Mensagem Fatal"	actionListener="#{mensagens.fatal}"></p:commandButton>
+	</h:form>
+</h:body>
+</html>
+
