@@ -6,20 +6,27 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import com.web.dao.UsuarioDao;
 import com.web.model.Usuario;
+import com.web.service.UsuarioService;
 
 @ManagedBean
 @ViewScoped
 public class UsuarioManagedBean {
 
+	private final String TELA_NOVO_USUARIO = "/restrito/novoUsuario.xhtml?faces-redirect=true";
+	private final String TELA_LISTAGEM_USUARIO = "/restrito/listagemUsuarios?faces-redirect=true";
+	
 	private UsuarioDao usuarioDao = new UsuarioDao();
 	private Usuario usuario = new Usuario();
-	private List<Usuario> usuarioListDb = new ArrayList<>();
 
+	@ManagedProperty("#{usuarioService}")
+	private UsuarioService usuarioService;
+	
 	@PostConstruct
 	public void init() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -29,7 +36,7 @@ public class UsuarioManagedBean {
 		}
 	}
 
-	public List getUsuarioListDb() {
+	public List usuarioListDb() {
 		return usuarioDao.listarUsuario();
 	}
 
@@ -38,20 +45,23 @@ public class UsuarioManagedBean {
 	}
 
 	public String incluirUsuarioDb(Usuario usuario) {
-		if(!usuarioDao.inserirUsuario(usuario)) {
+		try {
+			getUsuarioService().salvarUsuario(usuario);
+			return TELA_LISTAGEM_USUARIO;
+		} catch (Exception e) {
+			e.printStackTrace();
+			
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: Usuário já existe!", null));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 			context.getExternalContext().getFlash().setKeepMessages(true);
 			
-			return "/restrito/novoUsuario.xhtml?faces-redirect=true";
+			return TELA_NOVO_USUARIO;
 		}
-
-		return "/restrito/listagemUsuarios?faces-redirect=true";
 	}
 	
 	public String editarUsuarioDb(Usuario usuario) {
 		usuarioDao.alterarUsuario(usuario);
-		return "/restrito/listagemUsuarios?faces-redirect=true";
+		return TELA_LISTAGEM_USUARIO;
 	}
 
 	public String paginaEditar(Usuario usuario) {
@@ -64,5 +74,13 @@ public class UsuarioManagedBean {
 	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
+	public void setUsuarioService(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
 	}
 }
